@@ -21,7 +21,7 @@ function setup() {
   // No stroke because shapes look nicer without it I think
   noStroke();
   // Set the nice pink
-  fill(255,190,190);
+  fill(255,255,190);
   // The ellipse mode will make it easier to align everything
   ellipseMode(CENTER);
   // Draw the head
