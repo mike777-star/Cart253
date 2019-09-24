@@ -96,6 +96,8 @@ function draw() {
     avatarY = height/2;
     // Reset the dodge counter
     dodges = 0;
+    enemySize = 50;
+    enemySpeed = 5;
   }
 
   // Check if the avatar has gone off the screen (cheating!)
@@ -118,6 +120,8 @@ function draw() {
     // Reset the enemy's position to the left at a random height
     enemyX = 0;
     enemyY = random(0,height);
+    enemySize = enemySize + 10;
+    enemySpeed = enemySpeed + 10;
   }
 
   // Display the number of successful dodges in the console
