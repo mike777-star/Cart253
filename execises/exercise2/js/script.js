@@ -1,11 +1,4 @@
-/******************************************************
 
-Game - The Artful Dodger
-Pippin Barr
-
-A simple dodging game with keyboard controls
-
-******************************************************/
 
 // The position and size of our avatar circle
 let avatarX;
@@ -139,5 +132,10 @@ function draw() {
   fill(255,0,0);
   // Draw the enemy as a circle
   ellipse(enemyX,enemyY,enemySize,enemySize);
+
+  textAlign(RIGHT,TOP);
+  textSize(64);
+  fill(0);
+  text(dodges, width,0);
 
 }
