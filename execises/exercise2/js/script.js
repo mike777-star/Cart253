@@ -46,8 +46,11 @@ function setup() {
 // Handle moving the avatar and enemy and checking for dodges and
 // game over situations.
 function draw() {
-  // A pink background
-  background(255,220,220);
+  // If the score is zero set background to blue
+  // if (dodges == 0) {
+    // A blue background
+    background(0,220,220);
+
 
   // Default the avatar's velocity to 0 in case no key is pressed this frame
   avatarVX = 0;
@@ -98,6 +101,7 @@ function draw() {
     dodges = 0;
     enemySize = 50;
     enemySpeed = 5;
+    //I added this to reset the size and speed when you lose
   }
 
   // Check if the avatar has gone off the screen (cheating!)
@@ -115,13 +119,15 @@ function draw() {
   if (enemyX > width) {
     // This means the player dodged so update its dodge statistic
     dodges = dodges + 1;
+    // background(random(255),random(255),random(255));
     // Tell them how many dodges they have made
     console.log(dodges + " DODGES!");
     // Reset the enemy's position to the left at a random height
     enemyX = 0;
     enemyY = random(0,height);
     enemySize = enemySize + 10;
-    enemySpeed = enemySpeed + 10;
+    enemySpeed = enemySpeed + 2;
+    //I added this so every time your dodge the enemy its speed and size increases
   }
 
   // Display the number of successful dodges in the console
@@ -133,13 +139,13 @@ function draw() {
   ellipse(avatarX,avatarY,avatarSize,avatarSize);
 
   // The enemy is red
-  fill(255,0,0);
+  fill(150,0,200);
   // Draw the enemy as a circle
   ellipse(enemyX,enemyY,enemySize,enemySize);
 
   textAlign(RIGHT,TOP);
-  textSize(64);
-  fill(0);
+  textSize(60)
+  fill(100,0,200);
   text(dodges, width,0);
 
 }
