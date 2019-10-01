@@ -16,6 +16,9 @@ https://creativenerds.co.uk/freebies/80-free-wildlife-icons-the-best-ever-animal
 let targetX;
 let targetY;
 let targetImage;
+let targetspeed=10;
+let targetVX=10;
+//I added targetspeed and targetVX variables to determine the speed and velocity of the dog once it is found.
 
 // The ten decoy images
 let decoyImage1;
@@ -127,18 +130,23 @@ function draw() {
     fill(255,255,0);
     text("Where Am I?",width-190,190);
     textSize(30);
-  //I added a sausage dog image inside a turquoise rectangle in the top right corner. I also added the text "Where am I".
+  //I added the sausage dog image inside a turquoise rectangle in the top right corner. I also added the text "Where am I".
 
   if (gameOver) {
+
+    targetVX=targetspeed;
+    targetX=targetX+targetVX;
+    //This line is telling the dog to travel across the x axis left to right once it is found.
     // Prepare our typography
     textFont("Helvetica");
     textSize(128);
     textAlign(CENTER,CENTER);
     noStroke();
     fill(random(255));
+    background(0);
 
     // Tell them they won!
-    text("YOU WINNED!",width/2,height/2);
+    text("YOU Found the Dog!",width/2,height/2);
 
     // Draw a circle around the sausage dog to show where it is (even though
     // they already know because they found it!)
@@ -146,6 +154,8 @@ function draw() {
     stroke(random(255));
     strokeWeight(10);
     ellipse(targetX,targetY,targetImage.width,targetImage.height);
+    image(targetImage,targetX,targetY);
+    //I queued the image here so when the player finds the sausage dog it begins to animate across the screen.
   }
 }
 
