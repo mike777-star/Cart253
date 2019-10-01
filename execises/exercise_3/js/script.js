@@ -61,7 +61,7 @@ function preload() {
 function setup() {
   createCanvas(windowWidth,windowHeight);
   background("#ffff00");
-  imageMode(CENTER);s2
+  imageMode(CENTER);
 
   // Use a for loop to draw as many decoys as we need
   for (let i = 0; i < numDecoys; i++) {
@@ -121,7 +121,13 @@ function setup() {
 // otherwise nothing (all the gameplay stuff is in mousePressed())
 function draw() {
 
-
+  fill(0,100,100);
+    rect(width-200,0,200,200);
+    image(targetImage,width-90,80,200,200);
+    fill(255,255,0);
+    text("Where Am I?",width-190,190);
+    textSize(30);
+  //I added a sausage dog image inside a turquoise rectangle in the top right corner. I also added the text "Where am I".
 
   if (gameOver) {
     // Prepare our typography
