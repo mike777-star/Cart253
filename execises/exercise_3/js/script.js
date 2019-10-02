@@ -16,8 +16,8 @@ https://creativenerds.co.uk/freebies/80-free-wildlife-icons-the-best-ever-animal
 let targetX;
 let targetY;
 let targetImage;
-let targetspeed=10;
-let targetVX=10;
+let targetspeed=15;
+let targetVX=15;
 //I added targetspeed and targetVX variables to determine the speed and velocity of the dog's animation once it is found.
 
 // The ten decoy images
@@ -63,11 +63,13 @@ function preload() {
 // of decoys in random positions, then the target
 function setup() {
   createCanvas(windowWidth,windowHeight);
-  background("#ffff00");
+  background(0,210,255);
   imageMode(CENTER);
 
+
   let imageSize=random(30,200);
-  //I added this variable to randomly shrink the size of the dog each time you find it. This will increase the difficulty of the game.
+  //I added this variable to randomly change the size of the dog each time you find it.
+  //This can increase the difficulty of the game when you reload it.
 
   // Use a for loop to draw as many decoys as we need
   for (let i = 0; i < numDecoys; i++) {
@@ -118,7 +120,7 @@ function setup() {
 
   // And draw it (because it's the last thing drawn, it will always be on top)
   image(targetImage,targetX,targetY,imageSize,imageSize);
-  //I added imageSize parameters so the dog's height and width would shrink each time you find it or reload the page.
+  //I added imageSize to the images parameters for my initial variable on line 69 in order to randomly alter the dogs size.//
 }
 
 
@@ -134,13 +136,16 @@ function draw() {
     fill(255,255,0);
     text("Where Am I?",width-190,190);
     textSize(30);
-  //I added the sausage dog image inside a turquoise rectangle in the top right corner. I also added the text "Where am I".
+  //I added the sausage dog image inside a turquoise rectangle in the top right corner. I also added the text "Where am I?".
 
   if (gameOver) {
 
     targetVX=targetspeed;
     targetX=targetX+targetVX;
-    //This line is telling the dog to travel across the x axis left to right once it is found.
+    //This line is determining the dogs movement through its position and velocity.
+    //This will be triggered once the game is over//
+
+
     // Prepare our typography
     textFont("Helvetica");
     textSize(128);
@@ -159,7 +164,7 @@ function draw() {
     strokeWeight(10);
     ellipse(targetX,targetY,targetImage.width,targetImage.height);
     image(targetImage,targetX,targetY);
-    //I queued the image here so when the player finds the sausage dog it begins to animate across the screen.
+    //I queued the image here so when the player finds the sausage dog it begins to animate across the x axis//
   }
 }
 
