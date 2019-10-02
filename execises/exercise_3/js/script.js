@@ -66,6 +66,9 @@ function setup() {
   background("#ffff00");
   imageMode(CENTER);
 
+  let imageSize=random(30,200);
+  //I added this variable to randomly shrink the size of the dog each time you find it.
+
   // Use a for loop to draw as many decoys as we need
   for (let i = 0; i < numDecoys; i++) {
     // Choose a random location on the canvas for this decoy
@@ -114,7 +117,8 @@ function setup() {
   targetY = random(0,height);
 
   // And draw it (because it's the last thing drawn, it will always be on top)
-  image(targetImage,targetX,targetY);
+  image(targetImage,targetX,targetY,imageSize,imageSize);
+  //I added imageSize so the dogs height and width would shrink each time you find it or reload the page.
 }
 
 
