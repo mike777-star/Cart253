@@ -18,7 +18,7 @@ let targetY;
 let targetImage;
 let targetspeed=10;
 let targetVX=10;
-//I added targetspeed and targetVX variables to determine the speed and velocity of the dog once it is found.
+//I added targetspeed and targetVX variables to determine the speed and velocity of the dog's animation once it is found.
 
 // The ten decoy images
 let decoyImage1;
@@ -67,7 +67,7 @@ function setup() {
   imageMode(CENTER);
 
   let imageSize=random(30,200);
-  //I added this variable to randomly shrink the size of the dog each time you find it.
+  //I added this variable to randomly shrink the size of the dog each time you find it. This will increase the difficulty of the game.
 
   // Use a for loop to draw as many decoys as we need
   for (let i = 0; i < numDecoys; i++) {
@@ -118,7 +118,7 @@ function setup() {
 
   // And draw it (because it's the last thing drawn, it will always be on top)
   image(targetImage,targetX,targetY,imageSize,imageSize);
-  //I added imageSize so the dogs height and width would shrink each time you find it or reload the page.
+  //I added imageSize parameters so the dog's height and width would shrink each time you find it or reload the page.
 }
 
 
