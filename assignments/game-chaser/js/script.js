@@ -3,7 +3,12 @@
 /******************************************************
 
 Game - Chaser
-Pippin Barr
+Michael Sarlos
+step 1:
+step2:
+step3:
+step4:
+step5:
 
 A "simple" game of cat and mouse. The player is a circle and can move with keys,
 if they overlap the (randomly moving) prey they "eat it" by sucking out its life
@@ -139,6 +144,20 @@ function handleInput() {
   else {
     playerVY = 0;
   }
+//STEP 2://
+  if (keyIsDown(SHIFT)) {
+    //At first this created a constant acceleration//
+    //playerMaxSpeed += 1//
+
+    playerMaxSpeed = 5;
+
+  }
+  //I put this conditional so the speed would return to the normal preyMaxSpeed...
+  //...if they stop pressing SHIFT
+  else {
+    playerMaxSpeed = 2;
+  }
+
 }
 
 // movePlayer()
@@ -212,6 +231,7 @@ function checkEating() {
       preyHealth = preyMaxHealth;
       // Track how many prey were eaten
       preyEaten = preyEaten + 1;
+
     }
   }
 }
@@ -230,6 +250,7 @@ function movePrey() {
     // Use map() to convert from the 0-1 range of the random() function
     // to the appropriate range of velocities for the prey
 
+//STEP 1://
     //The noiseSeed assigns a random value to the noise x function
     noiseSeed(1)
     //I got the prey to move randomnly, but it is restricted to strict diagonal line as x=y
