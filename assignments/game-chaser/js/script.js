@@ -230,9 +230,14 @@ function movePrey() {
     // Use map() to convert from the 0-1 range of the random() function
     // to the appropriate range of velocities for the prey
 
+    //The noiseSeed assigns a random value to the noise x function
+    noiseSeed(1)
     //I got the prey to move randomnly, but it is restricted to strict diagonal line as x=y
     noiseIncriment+=1
     preyVX = map(noise(noiseIncriment), 0, 1, -preyMaxSpeed, preyMaxSpeed);
+    //I needed to put noiseSeed twice in order to effect both the x and y value randomnly in order to...//
+    //...avoid the linnear diagonal trajectory//
+    noiseSeed(4)
     preyVY = map(noise(noiseIncriment), 0, 1, -preyMaxSpeed, preyMaxSpeed);
   }
 
