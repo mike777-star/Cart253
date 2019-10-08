@@ -232,6 +232,12 @@ function checkEating() {
       // Track how many prey were eaten
       preyEaten = preyEaten + 1;
 
+//STEP 3://
+    //this shrinks the prey everytime its eaten
+      preyRadius = preyRadius - 2;
+    //this increases the preys speed everytime its eaten
+      preyMaxSpeed += 1;
+
     }
   }
 }
