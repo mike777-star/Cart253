@@ -49,6 +49,11 @@ let eatHealth = 10;
 // Number of prey eaten during the game (the "score")
 let preyEaten = 0;
 
+// I created this variable to control preys motion for the noise function
+let noiseIncriment = 0;
+
+
+
 // setup()
 //
 // Sets up the basic elements of the game
@@ -224,8 +229,11 @@ function movePrey() {
     //
     // Use map() to convert from the 0-1 range of the random() function
     // to the appropriate range of velocities for the prey
-    preyVX = map(random(), 0, 1, -preyMaxSpeed, preyMaxSpeed);
-    preyVY = map(random(), 0, 1, -preyMaxSpeed, preyMaxSpeed);
+
+    //I got the prey to move randomnly, but it is restricted to strict diagonal line as x=y
+    noiseIncriment+=1
+    preyVX = map(noise(noiseIncriment), 0, 1, -preyMaxSpeed, preyMaxSpeed);
+    preyVY = map(noise(noiseIncriment), 0, 1, -preyMaxSpeed, preyMaxSpeed);
   }
 
   // Update prey position based on velocity
