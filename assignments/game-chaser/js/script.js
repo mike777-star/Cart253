@@ -36,6 +36,13 @@ let playerMaxHealth = 255;
 // Player fill color
 let playerFill = 50;
 
+//STEP 5://
+//I created two new variables for my two new image files for my player and prey
+let exampleImage;
+let exampleImage2;
+
+let soundbite;
+
 // Prey position, size, velocity
 let preyX;
 let preyY;
@@ -57,8 +64,15 @@ let preyEaten = 0;
 // I created this variable to control preys motion for the noise function
 let noiseIncriment = 0;
 
+//STEP 5:...//
 
-
+function preload() {
+//I preloaded my new image files for the player and prey
+  exampleImage = loadImage("assets/images/mr.tickle.png");
+  exampleImage2 = loadImage("assets/images/mr.messy.png");
+//I also preloaded the sound file I will use each time the prey is eaten
+  soundbite = loadSound("assets/sounds/sound.wav")
+}
 // setup()
 //
 // Sets up the basic elements of the game
@@ -100,7 +114,8 @@ function setupPlayer() {
 // displays the two agents.
 // When the game is over, shows the game over screen.
 function draw() {
-  background(100, 100, 200);
+  //I changed the background color
+  background(150, 200, 255);
 
   if (!gameOver) {
     handleInput();
@@ -231,6 +246,9 @@ function checkEating() {
       preyHealth = preyMaxHealth;
       // Track how many prey were eaten
       preyEaten = preyEaten + 1;
+//STEP 5:...//
+//I am queuing the soundbite variable with the play function each time the prey is eaten
+      soundbite.play()
 
 //STEP 3://
     //this shrinks the prey everytime its eaten
@@ -293,15 +311,25 @@ function movePrey() {
 // Draw the prey as an ellipse with alpha based on health
 function drawPrey() {
   fill(preyFill, preyHealth);
-  ellipse(preyX, preyY, preyRadius * 2);
+  //ellipse(preyX, preyY, preyRadius * 2);
+//I linked inputed  image to the prey
+
+//STEP 5:...//
+//I link my preloaded image to my prey through the image function, using my new variables
+  image(exampleImage2, preyX, preyY, preyRadius * 4, preyRadius * 4);
 }
 
 // drawPlayer()
 //
 // Draw the player as an ellipse with alpha value based on health
 function drawPlayer() {
-  fill(playerFill, playerHealth);
-  ellipse(playerX, playerY, playerRadius * 2);
+//this links the players opacity to its health, which makes it slowly fade away
+  tint(255, playerHealth);
+
+  imageMode(CENTER);
+
+//line 310 repeated to link my other images variable to the player
+  image(exampleImage, playerX, playerY, playerRadius * 4, playerRadius * 4);
 }
 
 // showGameOver()
