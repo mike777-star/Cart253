@@ -43,6 +43,9 @@ let exampleImage2;
 
 let soundbite;
 
+//I tried adding a background. Here is the variable I created.
+let wallpaper;
+
 // Prey position, size, velocity
 let preyX;
 let preyY;
@@ -70,6 +73,8 @@ function preload() {
 //I preloaded my new image files for the player and prey
   exampleImage = loadImage("assets/images/mr.tickle.png");
   exampleImage2 = loadImage("assets/images/mr.messy.png");
+//My attempt at loading the background image
+  wallpaper = loadImage("assets/images/whole_gang.png");
 //I also preloaded the sound file I will use each time the prey is eaten
   soundbite = loadSound("assets/sounds/sound.wav")
 }
@@ -78,6 +83,8 @@ function preload() {
 // Sets up the basic elements of the game
 function setup() {
   createCanvas(500, 500);
+  image(wallpaper, 0, 0);
+
 
   noStroke();
 
@@ -115,6 +122,9 @@ function setupPlayer() {
 // When the game is over, shows the game over screen.
 function draw() {
   //I changed the background color
+
+  //I tried changing the background, but the player and prey would repeat every position...
+  //...delete this background function to see the error
   background(150, 200, 255);
 
   if (!gameOver) {
@@ -254,7 +264,7 @@ function checkEating() {
     //this shrinks the prey everytime its eaten
       preyRadius = preyRadius - 2;
     //this increases the preys speed everytime its eaten
-      preyMaxSpeed += 1;
+      preyMaxSpeed += 2;
 
     }
   }
@@ -337,12 +347,12 @@ function drawPlayer() {
 // Display text about the game being over!
 function showGameOver() {
   // Set up the font
-  textSize(32);
+  textSize(40);
   textAlign(CENTER, CENTER);
   fill(0);
   // Set up the text to display
   let gameOverText = "GAME OVER\n"; // \n means "new line"
-  gameOverText = gameOverText + "You ate " + preyEaten + " prey\n";
+  gameOverText = gameOverText + "You made " + preyEaten + " friends\n";
   gameOverText = gameOverText + "before you died."
   // Display it in the centre of the screen
   text(gameOverText, width / 2, height / 2);
