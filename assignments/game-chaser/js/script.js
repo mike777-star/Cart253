@@ -43,8 +43,7 @@ let exampleImage2;
 
 let soundbite;
 
-//I tried adding a background. Here is the variable I created.
-let wallpaper;
+
 
 // Prey position, size, velocity
 let preyX;
@@ -73,8 +72,7 @@ function preload() {
 //I preloaded my new image files for the player and prey
   exampleImage = loadImage("assets/images/mr.tickle.png");
   exampleImage2 = loadImage("assets/images/mr.messy.png");
-//My attempt at loading the background image
-  wallpaper = loadImage("assets/images/whole_gang.jpg");
+
 //I also preloaded the sound file I will use each time the prey is eaten
   soundbite = loadSound("assets/sounds/sound.wav")
 }
@@ -83,6 +81,7 @@ function preload() {
 // Sets up the basic elements of the game
 function setup() {
   createCanvas(500, 500);
+  image(wallpaper, 0, 0);
 
 
   noStroke();
@@ -124,8 +123,7 @@ function draw() {
 
   //I tried changing the background, but the player and prey would repeat every position...
   //...delete this background function to see the error
-  background(wallpaper);
-  // image(wallpaper, 0, 0, width, height);
+  background(150, 200, 255);
 
   if (!gameOver) {
     handleInput();
