@@ -178,7 +178,7 @@ function handleInput(paddle) {
 function updatePaddle(paddle) {
   // Update the paddle position based on its velocity
   paddle.y += paddle.vy;
-  console.log(paddle.vy);
+  
 }
 
 // updateBall()
@@ -209,6 +209,8 @@ function ballIsOutOfBounds() {
     //increasing the pads height by 30 pixels for each point
 
     ball.speedX = 5;
+    //Step 3: I created this so that each time the right pad wins the ball resets...
+    //heading back in the right pads direction
     return true;
   }
   else if (ball.x > width) {
@@ -221,6 +223,7 @@ function ballIsOutOfBounds() {
     //Step 2: I created the same growth function for the left paddle
 
     ball.speedX = -5;
+    //Step 3: This function resets the ball in the left pad's direction if it wins
     return true;
   }
   return false;
