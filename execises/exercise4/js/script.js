@@ -68,14 +68,19 @@ let rightPaddle = {
 let ballImage;
 let beepSFX;
 let boopSFX;
+//Step 4: Here I added an additional sound variable as I wanted seperate sounds...
+//for when the ball hits the walls and the pads
+
 // preload()
 //
 // Loads the beep audio for the sound of bouncing
 function preload() {
   ballImage = loadImage ("assets/images/stubborn.png")
-  //...//
+//Step 4: New image file for my ball variable
+
   beepSFX = new Audio("assets/sounds/sound.wav");
   boopSFX = new Audio("assets/sounds/sound2.wav");
+//Step 4: I loaded two new sound files. Thanks p5 Sound!
 }
 
 // setup()
@@ -91,6 +96,7 @@ function setup() {
   fill(fgColor);
 
   bgColor = color(138, 100, 255);
+  //Step 4: Changed the background to purple to stylistically match my ball graphic
 
   setupPaddles();
   resetBall();
@@ -178,7 +184,7 @@ function handleInput(paddle) {
 function updatePaddle(paddle) {
   // Update the paddle position based on its velocity
   paddle.y += paddle.vy;
-  
+
 }
 
 // updateBall()
@@ -242,6 +248,8 @@ function checkBallWallCollision() {
     // Play our bouncing sound effect by rewinding and then playing
     beepSFX.currentTime = 0;
     beepSFX.play();
+    //Step 4: This triggers my first sound file each time the ball variable...
+    //hits a wall
   }
 }
 
@@ -273,6 +281,8 @@ function checkBallPaddleCollision(paddle) {
       // Play our bouncing sound effect by rewinding and then playing
       boopSFX.currentTime = 0;
       boopSFX.play();
+      //Step 4: This triggers my second sound file each time the ball variable...
+      //hits a paddle. Sorry if this gets a bit annoying
     }
   }
 }
@@ -292,7 +302,11 @@ function displayPaddle(paddle) {
 function displayBall() {
   // Draw the ball
   imageMode(CENTER);
+
   image(ballImage, ball.x, ball.y, ball.size, ball.size);
+  //Step 4: This displays my image file on the ball variable giving the game...
+  //a one of a kind art style. I also needed to center the image as it was crossing...
+  //into the right paddle and never really touching the left one.
 
 
 }
