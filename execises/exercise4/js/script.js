@@ -202,9 +202,11 @@ function ballIsOutOfBounds() {
     rightpadpoints = rightpadpoints + 1;
     //Step 1: I created this function to count right pad's score by adding +1...
     //to its score every time the ball's horizontal position is less then 0
+    //I also seperated the conditionals give them each seperate functions
 
     rightPaddle.h = rightPaddle.h + 30;
-    
+    //Step 2: I created this function so the score would visually be depicted by
+    //increasing the pads height by 30 pixels for each point
 
     ball.speedX = 5;
     return true;
@@ -216,6 +218,7 @@ function ballIsOutOfBounds() {
     //it adds +1 everytime the ball's horizontal position is greater then the...
     //canvas's width.
     leftPaddle.h = leftPaddle.h + 30;
+    //Step 2: I created the same growth function for the left paddle
 
     ball.speedX = -5;
     return true;
