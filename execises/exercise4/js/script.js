@@ -13,8 +13,12 @@
 let playing = false;
 
 // Game colors (using hexadecimal)
-let bgColor = 0;
+let bgColor;
 let fgColor = 255;
+
+let leftpadpoints;
+let rightpadpoints;
+//Step 1: I created two new variables to count the scores for both pads.
 
 // BALL
 
@@ -23,10 +27,11 @@ let fgColor = 255;
 let ball = {
   x: 0,
   y: 0,
-  size: 20,
+  size: 50,
   vx: 0,
   vy: 0,
-  speed: 5
+  speedX: 5,
+  speedY: 5,
 }
 
 // PADDLES
@@ -39,7 +44,7 @@ let leftPaddle = {
   w: 20,
   h: 70,
   vy: 0,
-  speed: 5,
+  speedY: 5,
   upKey: 87,
   downKey: 83
 }
@@ -54,19 +59,23 @@ let rightPaddle = {
   w: 20,
   h: 70,
   vy: 0,
-  speed: 5,
+  speedY: 5,
   upKey: 38,
   downKey: 40
 }
 
 // A variable to hold the beep sound we will play on bouncing
+let ballImage;
 let beepSFX;
-
+let boopSFX;
 // preload()
 //
 // Loads the beep audio for the sound of bouncing
 function preload() {
-  beepSFX = new Audio("assets/sounds/beep.wav");
+  ballImage = loadImage ("assets/images/stubborn.png")
+  //...//
+  beepSFX = new Audio("assets/sounds/sound.wav");
+  boopSFX = new Audio("assets/sounds/sound2.wav");
 }
 
 // setup()
@@ -80,6 +89,8 @@ function setup() {
   rectMode(CENTER);
   noStroke();
   fill(fgColor);
+
+  bgColor = color(138, 100, 255);
 
   setupPaddles();
   resetBall();
@@ -148,12 +159,12 @@ function handleInput(paddle) {
   // If the up key is being pressed
   if (keyIsDown(paddle.upKey)) {
     // Move up
-    paddle.vy = -paddle.speed;
+    paddle.vy = -paddle.speedY;
   }
   // Otherwise if the down key is being pressed
   else if (keyIsDown(paddle.downKey)) {
     // Move down
-    paddle.vy = paddle.speed;
+    paddle.vy = paddle.speedY;
   }
   else {
     // Otherwise stop moving
@@ -167,6 +178,7 @@ function handleInput(paddle) {
 function updatePaddle(paddle) {
   // Update the paddle position based on its velocity
   paddle.y += paddle.vy;
+  console.log(paddle.vy);
 }
 
 // updateBall()
@@ -176,6 +188,7 @@ function updateBall() {
   // Update the ball's position based on velocity
   ball.x += ball.vx;
   ball.y += ball.vy;
+
 }
 
 // ballIsOutOfBounds()
@@ -184,12 +197,28 @@ function updateBall() {
 // Returns true if so, false otherwise
 function ballIsOutOfBounds() {
   // Check for ball going off the sides
-  if (ball.x < 0 || ball.x > width) {
+
+  if (ball.x < 0)  {
+    rightpadpoints = rightpadpoints + 1;
+    //Step 1: I created this function to count right pad's score by adding +1...
+    //to its score every time the ball's horizontal position is less then 0
+    rightPaddle.h = rightPaddle.h + 30;
+
+    ball.speedX = 5;
     return true;
   }
-  else {
-    return false;
+  else if (ball.x > width) {
+
+    leftpadpoints = leftpadpoints + 1;
+    //Step 1: This is counts the left pads score, by doing the same thing, except...
+    //it adds +1 everytime the ball's horizontal position is greater then the...
+    //canvas's width.
+    leftPaddle.h = leftPaddle.h + 30;
+
+    ball.speedX = -5;
+    return true;
   }
+  return false;
 }
 
 // checkBallWallCollision()
@@ -234,8 +263,8 @@ function checkBallPaddleCollision(paddle) {
       // Reverse its vx so it starts travelling in the opposite direction
       ball.vx = -ball.vx;
       // Play our bouncing sound effect by rewinding and then playing
-      beepSFX.currentTime = 0;
-      beepSFX.play();
+      boopSFX.currentTime = 0;
+      boopSFX.play();
     }
   }
 }
@@ -246,6 +275,7 @@ function checkBallPaddleCollision(paddle) {
 function displayPaddle(paddle) {
   // Draw the paddles
   rect(paddle.x, paddle.y, paddle.w, paddle.h);
+
 }
 
 // displayBall()
@@ -253,7 +283,10 @@ function displayPaddle(paddle) {
 // Draws the ball on screen as a square
 function displayBall() {
   // Draw the ball
-  rect(ball.x, ball.y, ball.size, ball.size);
+  imageMode(CENTER);
+  image(ballImage, ball.x, ball.y, ball.size, ball.size);
+
+
 }
 
 // resetBall()
@@ -263,8 +296,8 @@ function resetBall() {
   // Initialise the ball's position and velocity
   ball.x = width / 2;
   ball.y = height / 2;
-  ball.vx = ball.speed;
-  ball.vy = ball.speed;
+  ball.vx = ball.speedX;
+  ball.vy = ball.speedY;
 }
 
 // displayStartMessage()
