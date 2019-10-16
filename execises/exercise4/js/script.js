@@ -202,7 +202,9 @@ function ballIsOutOfBounds() {
     rightpadpoints = rightpadpoints + 1;
     //Step 1: I created this function to count right pad's score by adding +1...
     //to its score every time the ball's horizontal position is less then 0
+
     rightPaddle.h = rightPaddle.h + 30;
+    
 
     ball.speedX = 5;
     return true;
