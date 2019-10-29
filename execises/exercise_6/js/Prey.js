@@ -8,7 +8,8 @@
 // ~10 ERRORS IN HERE
 /////////////////////////
 
-glass Prey {
+class Prey {
+//Fixed: I changed glass to class//
 
   // constructor
   //
@@ -48,11 +49,13 @@ glass Prey {
     this.tx += 0.01;
     this.ty += 0.01;
     // Handle wrapping
-    this.handleWarping();
-
+    this.handleWrapping();
+    //Fixed: changed handleWarping to handleWrapping
+  }
+  //Fixed: Missing bracket
 
     // handleWrapping
-    //
+    //Fixed: Removed empty comment
     // Checks if the prey has gone off the canvas and
     // wraps it to the other side if so
     handleWrapping() {

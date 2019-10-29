@@ -23,10 +23,13 @@ let bee;
 //
 // Sets up a canvas
 // Creates objects for the predator and three prey
-functionsetup() {
+function setup() {
+  //Fixed: added space between function and setup
   createCanvas(windowWidth, windowHeight);
-  tiger = new Predator(100, , 100, 5, color(200, 200, 0), 40);
-  antelope = new Prey(100, 100, 10, color(255, 100, 10), 50);
+  tiger = new Predator(100, 100, 100, 5, color(200, 200, 0), 40);
+  //Fixed: Tiger was missing his Y value so I inputed 100
+  antelop = new Prey(100, 100, 10, color(255, 100, 10), 50);
+  //Fixed: Variable was defined as antelop but was written antelop(e) in the setup
   zebra = new Prey(100, 8, color(255, 255, 255), 60);
   bee = new Prey(100, 100, 20, color(255, 255, 0), 10);
 }
