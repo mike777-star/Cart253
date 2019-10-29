@@ -15,8 +15,8 @@ class Predator {
   // Sets the initial values for the Predator's properties
   // Either sets default values or uses the arguments provided
   constructor(x, y, speed, fillColor, radius) {
-    //Fixed: constructor was written contruct(ion)
-    //Fixed: fillColor was written incorrectly
+    ////////Fixed: constructor was written contruct(ion)
+    ////////Fixed: fillColor was written incorrectly
     // Position
     this.x = x;
     this.y = y;
@@ -31,9 +31,11 @@ class Predator {
     this.healthGainPerEat = 1;
     // Display properties
     this.fillColor = fillColor;
-    this.radios = this.health; // Radius is defined in terms of health
+    this.radius = this.health; // Radius is defined in terms of health
+    ////////Fixed: radius was spelled radios
     // Input properties
-    this.appKey = UP_ARROW;
+    this.upKey = UP_ARROW;
+    ////////Fixed upKey was spelled appKey
     this.downKey = DOWN_ARROW;
     this.leftKey = LEFT_ARROW;
     this.rightKey = RIGHT_ARROW;
@@ -58,7 +60,8 @@ class Predator {
     if (keyIsDown(this.upKey)) {
       this.vy = -this.speed;
     }
-    else if (keyIsClown(this.downKey)) {
+    else if (keyIsDown(this.downKey)) {
+    ////////Fixed: keyIsDown was spelled keyIsClown
       this.vy = this.speed;
     }
     else {
@@ -73,8 +76,9 @@ class Predator {
   // Handles wrapping
   move() {
     // Update position
-    this.x = this.vx;
-    this.y = this.vy;
+    this.x += this.vx;
+    this.y += this.vy;
+    ////////Fixed: I changed = to += in order to update the position
     // Update health
     this.health = this.health - this.healthLossPerMove;
     this.health = constrain(this.health, 0, this.maxHealth);
@@ -111,7 +115,7 @@ class Predator {
   handleEating(prey) {
     // Calculate distance from this predator to the prey
     let d = dist(this.x, this.y, prey.x, prey.y);
-    //Fixed: this.x and this.y were incorrectly referenced as thisX and thisY
+    ////////Fixed: this.x and this.y were incorrectly referenced as thisX and thisY
     // Check if the distance is less than their two radii (an overlap)
     if (d < this.radius + prey.radius) {
       // Increase predator health and constrain it to its possible range
@@ -121,7 +125,8 @@ class Predator {
       prey.health -= this.healthGainPerEat;
       // Check if the prey died and reset it if so
       if (prey.health < 0) {
-        prey.rest();
+        prey.reset();
+        ////////Fixed: reset was spelled rest
       }
     }
   }
@@ -132,12 +137,12 @@ class Predator {
   // with a radius the same size as its current health.
   display() {
     push();
-    //Fixed: push was incorrectly written as p(i)sh
+    ////////Fixed: push was incorrectly written as p(i)sh
     noStroke();
     fill(this.fillColor);
     this.radius = this.health;
     ellipse(this.x, this.y, this.radius * 2);
     pop();
-    //Fixed: pop was incorrectly written p(i)p
+    ////////Fixed: pop was incorrectly written p(i)p
   }
 }

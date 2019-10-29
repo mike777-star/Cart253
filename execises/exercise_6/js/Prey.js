@@ -15,18 +15,20 @@ class Prey {
   //
   // Sets the initial values for the Predator's properties
   // Either sets default values or uses the arguments provided
-  constructor(x, y, why, speed, fillColor, radius) {
-    //Fixed: the contructor didn't define the y value so I added it in
+  constructor(x, y, speed, fillColor, radius) {
+    //Fixed: the contructor defined the y value as why so I added it in
     // Position
     this.x = x;
     this.y = y;
     // Velocity and speed
     this.vx = 0;
     this.vy = 0;
-    this.sped = speed;
+    this.speed = speed;
+    ////////Fixed: speed was written sped
     // Time properties for noise() function
-    this.tx = random(0, 0); // To make x and y noise different
-    this.ty = random(0, 0); // we use random starting values
+    this.tx = random(0, 1000); // To make x and y noise different
+    this.ty = random(0, 1000); // we use random starting values
+    //Fixed... time properties for noise 0,0
     // Health properties
     this.maxHealth = radius;
     this.health = this.maxHealth; // Must be AFTER defining this.maxHealth
@@ -62,7 +64,8 @@ class Prey {
     // wraps it to the other side if so
     handleWrapping() {
       // Off the left or right
-      if (this.x > 0) {
+      if (this.x < 0) {
+      //Fixed... >,<
         this.x += width;
       }
       else if (this.x > width) {
@@ -73,7 +76,8 @@ class Prey {
         this.y += height;
       }
       else if (this.y > height) {
-        this.y -= hight;
+        this.y -= height;
+      ////////Fixed: height was spelled hight
       }
     }
 
@@ -86,7 +90,8 @@ class Prey {
       noStroke();
       fill(this.fillColor);
       this.radius = this.health;
-      ellipse(this.x, this.y, this.radius * "two");
+      ellipse(this.x, this.y, this.radius * 2);
+      //Fixed... two, 2
       pop();
     }
 
