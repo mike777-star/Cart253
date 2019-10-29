@@ -15,7 +15,7 @@
 let tiger;
 
 // The three prey
-let antelop;
+let antelope;
 let zebra;
 let bee;
 
@@ -28,9 +28,10 @@ function setup() {
   createCanvas(windowWidth, windowHeight);
   tiger = new Predator(100, 100, 100, 5, color(200, 200, 0), 40);
   //Fixed: Tiger was missing his Y value so I inputed 100
-  antelop = new Prey(100, 100, 10, color(255, 100, 10), 50);
+  antelope = new Prey(100, 100, 10, color(255, 100, 10), 50);
   //Fixed: Variable was defined as antelop but was written antelop(e) in the setup
-  zebra = new Prey(100, 8, color(255, 255, 255), 60);
+  zebra = new Prey(100, 100, 8, color(255, 255, 255), 60);
+  //Fixed: Zebra was missing its diameter value
   bee = new Prey(100, 100, 20, color(255, 255, 0), 10);
 }
 
@@ -39,14 +40,17 @@ function setup() {
 // Handles input, movement, eating, and displaying for the system's objects
 function draw() {
   // Clear the background to black
-  backgroun(0);
+  background(0);
+  //Fixed: background was missing a (d) at the end
 
   // Handle input for the tiger
 
   // Move all the "animals"
   tiger.move();
   antelope.move();
+  //Fixed: Variable was defined as antelop but was written antelop(e) in the setup
   zebra.move();
+
 
   // Handle the tiger eating any of the prey
   tiger.handleEating(antelope);
@@ -55,7 +59,9 @@ function draw() {
 
   // Display all the "animals"
   tiger.display();
-  antelop.display();
-  zebra.disploy();
-  b.display();
+  antelope.display();
+  zebra.display();
+  //Fixed: display was written displ(o)y
+  bee.display();
+  //Fixed: bee was spelled b
 }

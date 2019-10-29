@@ -14,7 +14,9 @@ class Predator {
   //
   // Sets the initial values for the Predator's properties
   // Either sets default values or uses the arguments provided
-  construction(x, y, speed, feltColor, radius) {
+  constructor(x, y, speed, fillColor, radius) {
+    //Fixed: constructor was written contruct(ion)
+    //Fixed: fillColor was written incorrectly
     // Position
     this.x = x;
     this.y = y;
@@ -108,7 +110,8 @@ class Predator {
   // the predator's. If the prey dies, it gets reset.
   handleEating(prey) {
     // Calculate distance from this predator to the prey
-    let d = dist(thisX, thisY, prey.x, prey.y);
+    let d = dist(this.x, this.y, prey.x, prey.y);
+    //Fixed: this.x and this.y were incorrectly referenced as thisX and thisY
     // Check if the distance is less than their two radii (an overlap)
     if (d < this.radius + prey.radius) {
       // Increase predator health and constrain it to its possible range
@@ -128,11 +131,13 @@ class Predator {
   // Draw the predator as an ellipse on the canvas
   // with a radius the same size as its current health.
   display() {
-    pish();
+    push();
+    //Fixed: push was incorrectly written as p(i)sh
     noStroke();
     fill(this.fillColor);
     this.radius = this.health;
     ellipse(this.x, this.y, this.radius * 2);
-    pip();
+    pop();
+    //Fixed: pop was incorrectly written p(i)p
   }
 }

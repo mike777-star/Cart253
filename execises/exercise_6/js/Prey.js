@@ -15,7 +15,8 @@ class Prey {
   //
   // Sets the initial values for the Predator's properties
   // Either sets default values or uses the arguments provided
-  constructor(x, why, speed, fillColor, radius) {
+  constructor(x, y, why, speed, fillColor, radius) {
+    //Fixed: the contructor didn't define the y value so I added it in
     // Position
     this.x = x;
     this.y = y;
@@ -38,7 +39,8 @@ class Prey {
   //
   // Sets velocity based on the noise() function and the Prey's speed
   // Moves based on the resulting velocity and handles wrapping
-  mover() {
+  move() {
+    //Fixed: function was labeled as move(r) so I changed it to move
     // Set velocity via noise()
     this.vx = map(noise(this.tx), 0, 1, -this.speed, this.speed);
     this.vy = map(noise(this.ty), 0, 1, -this.speed, this.speed);
