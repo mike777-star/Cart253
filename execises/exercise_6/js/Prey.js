@@ -16,7 +16,7 @@ class Prey {
   // Sets the initial values for the Predator's properties
   // Either sets default values or uses the arguments provided
   constructor(x, y, speed, fillColor, radius) {
-    //Fixed: the contructor defined the y value as why so I added it in
+    ////////Fixed: the contructor defined the y value as why so I added it in
     // Position
     this.x = x;
     this.y = y;
@@ -28,7 +28,7 @@ class Prey {
     // Time properties for noise() function
     this.tx = random(0, 1000); // To make x and y noise different
     this.ty = random(0, 1000); // we use random starting values
-    //Fixed... time properties for noise 0,0
+    ////////Fixed... time properties for noise 0,0
     // Health properties
     this.maxHealth = radius;
     this.health = this.maxHealth; // Must be AFTER defining this.maxHealth
@@ -42,7 +42,7 @@ class Prey {
   // Sets velocity based on the noise() function and the Prey's speed
   // Moves based on the resulting velocity and handles wrapping
   move() {
-    //Fixed: function was labeled as move(r) so I changed it to move
+    ////////Fixed: function was labeled as move(r) so I changed it to move
     // Set velocity via noise()
     this.vx = map(noise(this.tx), 0, 1, -this.speed, this.speed);
     this.vy = map(noise(this.ty), 0, 1, -this.speed, this.speed);
@@ -54,9 +54,9 @@ class Prey {
     this.ty += 0.01;
     // Handle wrapping
     this.handleWrapping();
-    //Fixed: changed handleWarping to handleWrapping
+    ////////Fixed: changed handleWarping to handleWrapping
   }
-  //Fixed: Missing bracket
+    ////////Fixed: Missing bracket
 
     // handleWrapping
     //Fixed: Removed empty comment
@@ -65,7 +65,7 @@ class Prey {
     handleWrapping() {
       // Off the left or right
       if (this.x < 0) {
-      //Fixed... >,<
+      ////////Fixed... >,<
         this.x += width;
       }
       else if (this.x > width) {
@@ -91,8 +91,8 @@ class Prey {
       fill(this.fillColor);
       this.radius = this.health;
       ellipse(this.x, this.y, this.radius * 2);
-      //Fixed... two, 2
-      pop();
+      ////////Fixed... two, 2
+      pop(); 
     }
 
     // reset
