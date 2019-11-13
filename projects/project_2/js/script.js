@@ -36,6 +36,7 @@ function setup() {
 //Seeing as I am using arrays, I am setting up their contructor values
   player = new Predator(100, 100, 5, color(200, 200, 0), 60,  playerImage);
 
+//Your robot assistant will be it's own class
   mechanicalGroup[0] = new Zap (100, 100, 30, color(255, 100, 10), 50, zaptron);
 
    rottingGroup[0] = new Prey(100, 100, 30, color(255, 100, 10), 50, zombie);
@@ -44,7 +45,7 @@ function setup() {
 }
 
 // draw()
-//
+//``
 // Handles input, movement, eating, and displaying for the system's objects
 function draw() {
   // Clear the background to black

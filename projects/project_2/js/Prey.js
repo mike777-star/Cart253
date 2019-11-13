@@ -10,7 +10,7 @@ class Prey {
   //
   // Sets the initial values for the Predator's properties
   // Either sets default values or uses the arguments provided
-  constructor(x, y, speed, fillColor, radius) {
+  constructor(x, y, speed, fillColor, radius, monsterImage) {
     // Position
     this.x = x;
     this.y = y;
@@ -21,6 +21,9 @@ class Prey {
     // Time properties for noise() function
     this.tx = random(0, 1000); // To make x and y noise different
     this.ty = random(0, 1000); // we use random starting values
+
+    //Setting up the images
+    this.monsterImage = monsterImage;
     // Health properties
     this.maxHealth = radius;
     this.health = this.maxHealth; // Must be AFTER defining this.maxHealth
@@ -77,7 +80,9 @@ class Prey {
     noStroke();
     fill(this.fillColor);
     this.radius = this.health;
-    ellipse(this.x, this.y, this.radius * 2);
+
+    //Displaying the rottingGroup images
+    image(this.monsterImage, this.x, this.y, this.radius * 2, this.radius * 2);
     pop();
   }
 
