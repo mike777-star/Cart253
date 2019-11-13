@@ -1,28 +1,46 @@
 // Predator-Prey Simulation
-// by Pippin Barr
+// by Michael Sarlos
 //
 // Creates a predator and three prey (of different sizes and speeds)
 // The predator chases the prey using the arrow keys and consumes them.
 // The predator loses health over time, so must keep eating to survive.
 
-// Our predator
-let tiger;
+// My predators
+// you control playerImage
+let playerImage;
+//zaptron is your robot helper
+let zaptron;
 
-// The three prey
-let antelope;
-let zebra;
-let bee;
+// My three prey from the afterlife
+let zombie;
+let ghoul;
+let skeleton;
+
+//preload my image files
+function preload() {
+  playerImage = loadImage('assets/images/robot.png');
+  zaptron = loadImage('assets/images/zaptron.png');
+  zombie = loadImage('assets/images/zombie.png');
+  ghoul = loadImage('assets/images/ghoul.png');
+  skeleton = loadImage('assets/images/skeleton.png');
+}
 
 // setup()
 //
 // Sets up a canvas
 // Creates objects for the predator and three prey
 function setup() {
+
   createCanvas(windowWidth, windowHeight);
-  tiger = new Predator(100, 100, 5, color(200, 200, 0), 40);
-  antelope = new Prey(100, 100, 10, color(255, 100, 10), 50);
-  zebra = new Prey(100, 100, 8, color(255, 255, 255), 60);
-  bee = new Prey(100, 100, 20, color(255, 255, 0), 10);
+
+//Seeing as I am using arrays, I am setting up their contructor values
+  player = new Predator(100, 100, 5, color(200, 200, 0), 60,  playerImage);
+
+  mechanicalGroup[0] = new Zap (100, 100, 30, color(255, 100, 10), 50, zaptron);
+
+   rottingGroup[0] = new Prey(100, 100, 30, color(255, 100, 10), 50, zombie);
+   rottingGroup[1] = new Prey(100, 100, 30, color(255, 100, 10), 50, ghoul);
+   rottingGroup[2] = new Prey(100, 100, 30, color(255, 100, 10), 50, skeleton);
 }
 
 // draw()
