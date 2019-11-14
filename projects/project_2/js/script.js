@@ -18,6 +18,13 @@ let player;
 let zombie;
 let ghoul;
 let skeleton;
+
+//Defining my title screen variable
+let title;
+
+let gameBegin = true;
+let gameOver = false;
+
 //I forgot to define my array groups
 let mechanicalGroup = [];
 let rottingGroup = [];
@@ -53,6 +60,9 @@ function setup() {
    rottingGroup[1] = new Prey(100, 100, 30, color(255, 100, 10), 50, ghoul);
    rottingGroup[2] = new Prey(100, 100, 30, color(255, 100, 10), 50, skeleton);
    germGroup[0] = new Germ (500, 500, 5, color(255, 0, 0), 50, virus);
+
+//I will be creating a new class for my title screens
+    title = new Wordscreen(gameBegin,gameOver);
 }
 
 // draw()
@@ -61,6 +71,18 @@ function setup() {
 function draw() {
   // Clear the background to black
   background(0);
+
+//Setting up my conditionals so the start screen displays 
+  if (gameOver == true && gameBegin == false){
+  title.display();
+}
+
+if (gameOver == false && gameBegin == true){
+  title.display();
+  console.log(gameBegin);
+  return;
+
+}
 
 //I am defining my mechanicalGroup arrays move, display and handleEating functions
   for (let i = 0; i < mechanicalGroup.length; i++) {
@@ -101,4 +123,11 @@ function draw() {
       player.handleEating(skeleton);
 //Added the function for when the player passes over the virus
       player.handleSickness(virus);
+}
+
+//Creating my mouse click functon so clicking the start screen starta the game
+function mouseClicked(){
+    if (mouseX > 0 && mouseY > 0){
+      gameBegin = false;
+    }
 }
