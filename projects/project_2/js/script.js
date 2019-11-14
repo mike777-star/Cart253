@@ -51,23 +51,35 @@ function draw() {
   // Clear the background to black
   background(0);
 
-  // Handle input for the tiger
-  tiger.handleInput();
+//I am defining my mechanicalGroup arrays move, display and handleEating functions
+  for (let i = 0; i < mechanicalGroup.length; i++) {
+        mechanicalGroup[i].move();
+        mechanicalGroup[i].display();
+        mechanicalGroup[i].handleEating(rottingGroup[0]);
+        //...//
+        //he will only be able to eat what ever rottingGroup[0]...
+      }
+//I am defining my mechanicalGroup array's move, display and handleEating functions...
+//...so the player can eat the whole array group
+      for (let i = 0; i < rottingGroup.length; i++) {
+        rottingGroup[i].move();
+        rottingGroup[i].display();
+        player.handleEating(rottingGroup[i]);
 
-  // Move all the "animals"
-  tiger.move();
-  antelope.move();
-  zebra.move();
-  bee.move();
+      }
 
-  // Handle the tiger eating any of the prey
-  tiger.handleEating(antelope);
-  tiger.handleEating(zebra);
-  tiger.handleEating(bee);
+      for (let i = 0; i < mechanicalGroup.length; i++) {
+    mechanicalGroup[i].move();
+    mechanicalGroup[i].display();
 
-  // Display all the "animals"
-  tiger.display();
-  antelope.display();
-  zebra.display();
-  bee.display();
+
+      }
+//I am defining my player's functions for display, move, input and handleEating for...
+//...the zombie, ghoul and skeleton
+      player.display();
+      player.move();
+      player.handleInput();
+      player.handleEating(zombie);
+      player.handleEating(ghoul);
+      player.handleEating(skeleton);
 }

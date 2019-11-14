@@ -22,7 +22,7 @@ class Prey {
     this.tx = random(0, 1000); // To make x and y noise different
     this.ty = random(0, 1000); // we use random starting values
 
-    //Setting up the images
+    //Setting up the images variable
     this.monsterImage = monsterImage;
     // Health properties
     this.maxHealth = radius;
