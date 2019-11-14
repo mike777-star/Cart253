@@ -19,6 +19,14 @@ class Predator {
     this.vy = 0;
     this.speed = speed;
 
+    //I am defining new speed values for my Shift speed boost
+    this.defaultspeed = speed;
+    this.fastspeed = speed * 2;
+    //setting up my slowspeed for when player eats the germ
+    this.slowspeed = speed/15;
+    //timer to ensure its a limited amount of time he stays slow
+    this.slowtimer = 0;
+
     //Setting up the player's image variable
     this.playerImage = playerImage;
     // Health properties
@@ -34,6 +42,10 @@ class Predator {
     this.downKey = DOWN_ARROW;
     this.leftKey = LEFT_ARROW;
     this.rightKey = RIGHT_ARROW;
+
+    //I created another input property for Shift
+    this.shiftKey = 16;
+    this.score = 0;
   }
 
   // handleInput
@@ -41,7 +53,23 @@ class Predator {
   // Checks if an arrow key is pressed and sets the predator's
   // velocity appropriately.
   handleInput() {
-    // Horizontal movement
+
+    //this is making sure the slowtimer and the fastspeed don't interfere with each other
+    if (this.slowtimer <= 0){
+    //Created a conditional if Shift key is down the speed with increase to fastspeed
+    if (keyIsDown(this.shiftKey)){
+        this.speed = this.fastspeed;
+    }
+    //If it isn't pressed it returns to its normal speed but uses a new varibale defaultspeed
+    else {
+      this.speed = this.defaultspeed;
+      }
+    }
+
+    else {
+    this.speed = this.slowspeed;
+    }
+
     if (keyIsDown(this.leftKey)) {
       this.vx = -this.speed;
     }
@@ -77,6 +105,8 @@ class Predator {
     this.health = constrain(this.health, 0, this.maxHealth);
     // Handle wrapping
     this.handleWrapping();
+    console.log(this.health);
+    this.slowtimer -= 1;
   }
 
   // handleWrapping
@@ -117,9 +147,33 @@ class Predator {
       prey.health -= this.healthGainPerEat;
       // Check if the prey died and reset it if so
       if (prey.health < 0) {
+        this.score += 1;
         prey.reset();
       }
     }
+  }
+
+  handleSickness(germ) {
+    let d = dist(this.x, this.y, germ.x, germ.y);
+    // Check if the distance is less than their two radii (an overlap)
+    if (d < this.radius + germ.radius) {
+      // Increase predator health and constrain it to its possible range
+      this.health += this.healthGainPerEat;
+      this.health = constrain(this.health, 0, this.maxHealth);
+
+      //The virus triggers the slowtimer which slows down the player for 180 frames (3 seconds)
+      this.slowtimer = 180;
+      // Decrease prey health by the same amount
+      germ.health -= this.healthGainPerEat;
+      // Check if the prey died and reset it if so
+      if (germ.health < 0) {
+        this.score += 1;
+        germ.reset();
+      }
+    }
+    // else {
+    //   this.speed = this.defaultspeed;
+    // }
   }
 
   // display

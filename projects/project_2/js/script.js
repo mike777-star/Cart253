@@ -11,10 +11,19 @@ let playerImage;
 //zaptron is your robot helper
 let zaptron;
 
+//A virus which slows you down
+let virus;
 // My three prey from the afterlife
+let player;
 let zombie;
 let ghoul;
 let skeleton;
+//I forgot to define my array groups
+let mechanicalGroup = [];
+let rottingGroup = [];
+//I created an array group for my germ
+let germGroup = [];
+
 
 //preload my image files
 function preload() {
@@ -23,6 +32,7 @@ function preload() {
   zombie = loadImage('assets/images/zombie.png');
   ghoul = loadImage('assets/images/ghoul.png');
   skeleton = loadImage('assets/images/skeleton.png');
+  virus = loadImage('assets/images/germ.png');
 }
 
 // setup()
@@ -37,11 +47,12 @@ function setup() {
   player = new Predator(100, 100, 5, color(200, 200, 0), 60,  playerImage);
 
 //Your robot assistant will be it's own class
-  mechanicalGroup[0] = new Zap (100, 100, 30, color(255, 100, 10), 50, zaptron);
+  mechanicalGroup[0] = new Zap(100, 100, 30, color(255, 100, 10), 50, zaptron);
 
    rottingGroup[0] = new Prey(100, 100, 30, color(255, 100, 10), 50, zombie);
    rottingGroup[1] = new Prey(100, 100, 30, color(255, 100, 10), 50, ghoul);
    rottingGroup[2] = new Prey(100, 100, 30, color(255, 100, 10), 50, skeleton);
+   germGroup[0] = new Germ (500, 500, 5, color(255, 0, 0), 50, virus);
 }
 
 // draw()
@@ -68,10 +79,16 @@ function draw() {
 
       }
 
-      for (let i = 0; i < mechanicalGroup.length; i++) {
-    mechanicalGroup[i].move();
-    mechanicalGroup[i].display();
+      for (let i = 0; i < germGroup.length; i++) {
+      germGroup[i].move();
+      germGroup[i].display();
+      player.handleSickness(germGroup[i]);
 
+      }
+
+      for (let i = 0; i < mechanicalGroup.length; i++) {
+      mechanicalGroup[i].move();
+      mechanicalGroup[i].display();
 
       }
 //I am defining my player's functions for display, move, input and handleEating for...
@@ -82,4 +99,6 @@ function draw() {
       player.handleEating(zombie);
       player.handleEating(ghoul);
       player.handleEating(skeleton);
+//Added the function for when the player passes over the virus
+      player.handleSickness(virus);
 }
