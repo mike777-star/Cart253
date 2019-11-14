@@ -34,6 +34,7 @@ class Predator {
     this.health = this.maxHealth; // Must be AFTER defining this.maxHealth
     this.healthLossPerMove = 0.1;
     this.healthGainPerEat = 1;
+    this.damageToEnemies = 10;
     // Display properties
     this.fillColor = fillColor;
     this.radius = this.health; // Radius is defined in terms of health
@@ -144,7 +145,7 @@ class Predator {
       this.health += this.healthGainPerEat;
       this.health = constrain(this.health, 0, this.maxHealth);
       // Decrease prey health by the same amount
-      prey.health -= this.healthGainPerEat;
+      prey.health -= this.damageToEnemies;
       // Check if the prey died and reset it if so
       if (prey.health < 0) {
         this.score += 1;
@@ -167,7 +168,7 @@ class Predator {
       germ.health -= this.healthGainPerEat;
       // Check if the prey died and reset it if so
       if (germ.health < 0) {
-        this.score += 1;
+
         germ.reset();
       }
     }
@@ -175,6 +176,7 @@ class Predator {
     //   this.speed = this.defaultspeed;
     // }
   }
+
 
   // display
   //

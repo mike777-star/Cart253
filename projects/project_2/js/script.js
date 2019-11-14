@@ -22,6 +22,9 @@ let skeleton;
 //Defining my title screen variable
 let title;
 
+let starterImage;
+let enderImage;
+
 let gameBegin = true;
 let gameOver = false;
 
@@ -40,6 +43,8 @@ function preload() {
   ghoul = loadImage('assets/images/ghoul.png');
   skeleton = loadImage('assets/images/skeleton.png');
   virus = loadImage('assets/images/germ.png');
+  starterImage = loadImage('assets/images/starters.png');
+  enderImage = loadImage('assets/images/apoco.jpg');
 }
 
 // setup()
@@ -70,19 +75,42 @@ function setup() {
 // Handles input, movement, eating, and displaying for the system's objects
 function draw() {
   // Clear the background to black
-  background(0);
 
-//Setting up my conditionals so the start screen displays 
-  if (gameOver == true && gameBegin == false){
-  title.display();
-}
 
+//Setting up my conditionals so the start screen displays
+
+//This image will display for the start screen
 if (gameOver == false && gameBegin == true){
+  image(starterImage, 0, 0, width, height)
   title.display();
   console.log(gameBegin);
   return;
 
 }
+
+if (gameOver == false && gameBegin == false){
+
+//This displays the score everytime you completely eat an prey
+  background(0);
+  fill(150, 0, 255);
+  textSize(30);
+  text('Score '+player.score ,100,50);
+
+}
+
+//This will display the game over screen once the players health <= 0
+if (player.health <= 0){
+  gameOver = true;
+  fill(255, 0, 0);
+  textSize(50);
+  image(enderImage, 0, 0, width, height)
+  text('GameOver' ,300,550);
+
+
+}
+
+if (gameOver == false) {
+
 
 //I am defining my mechanicalGroup arrays move, display and handleEating functions
   for (let i = 0; i < mechanicalGroup.length; i++) {
@@ -123,7 +151,11 @@ if (gameOver == false && gameBegin == true){
       player.handleEating(skeleton);
 //Added the function for when the player passes over the virus
       player.handleSickness(virus);
+
+    }
 }
+
+
 
 //Creating my mouse click functon so clicking the start screen starta the game
 function mouseClicked(){

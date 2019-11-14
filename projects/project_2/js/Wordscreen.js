@@ -9,9 +9,10 @@ class Wordscreen {
 
    display(){
         if (this.gameBegin == true){
+          fill(255, 0, 0);
           textSize(30);
-          text('In a world where zombies attack you must click to start',100,100);
-          fill(0, 0, 255);
+          text('In a world where zombies attack you must click to start',100,40);
+
         } else {
 
         }
