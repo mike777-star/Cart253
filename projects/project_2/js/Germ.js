@@ -2,7 +2,6 @@
 class Germ {
 
   // constructor
-  //
   // Sets the initial values for the Prey's properties
   // Either sets default values or uses the arguments provided
   constructor(x, y, speed, fillColor, radius, germImage) {
