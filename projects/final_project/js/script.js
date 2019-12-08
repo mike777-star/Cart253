@@ -18,7 +18,8 @@ let aliens;
 function preload() {
   player = loadImage('assets/images/.png');
   lazer = loadImage('assets/images/.png');
-  blocks = loadImage('assets/images/.png');
+  //Realized I didn't need an image for my blocks
+  //blocks = loadImage('assets/images/.png');//
   aliens = loadImage('assets/images/.png');
 
   }
@@ -34,9 +35,9 @@ function setup() {
   player = new Jumper(100, 100, 5, color(200, 200, 0), 60,  player);
 
 //Setting up constructors for my Arrays
-  obstacleGroup[0] = new Pillar(100, 100, 30, color(255, 100, 10), 50, blocks);
+  obstacleGroup[0] = new Pillar(500, 500, 50, color(255, 100, 10));
 
-  enemyGroup[0] = new UFO(100, 100, 30, color(255, 100, 10), 50, aliens);
+  enemyGroup[0] = new UFO(500, randomChance, 30, color(255, 100, 10), 50, aliens);
 
 }
 
@@ -54,8 +55,9 @@ function draw() {
     for (let i = 0; i < enemyGroup.length; i++) {
     enemyGroup[i].move();
     enemyGroup[i].display();
+    //For when I add the blaster
+    player.handleZap(enemyGroup[i]);
     player.handleEating(enemyGroup[i]);
-
     }
 
 
@@ -63,6 +65,7 @@ function draw() {
     player.display();
     player.move();
     player.handleInput();
-    player.handleEating();
-
+    player.handleBlocking(blocks);
+    player.handleZap(aliens);
+    player.handleEating(aliens);
 }
