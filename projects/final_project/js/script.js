@@ -16,11 +16,11 @@ let aliens;
 
 //setting up my image files even though they undefined
 function preload() {
-  player = loadImage('assets/images/.png');
-  lazer = loadImage('assets/images/.png');
+  player = loadImage('assets/images/spaceman.png');
+  lazer = loadImage('assets/images/beam.png');
   //Realized I didn't need an image for my blocks
   //blocks = loadImage('assets/images/.png');//
-  aliens = loadImage('assets/images/.png');
+  aliens = loadImage('assets/images/et.png');
 
   }
 
@@ -32,12 +32,12 @@ function setup() {
   fill(fgColor);
 
 //Setting up my constructor values for my Jumper class
-  player = new Jumper(100, 100, 5, color(200, 200, 0), 60,  player);
+  player = new Jumper(100, 220, 5, color(200, 200, 0), 60,  player);
 
 //Setting up constructors for my Arrays
-  obstacleGroup[0] = new Pillar(500, 500, 50, color(255, 100, 10));
+  obstacleGroup[0] = new Pillar(10, 250, 50, 100, 5, color(255, 100, 10));
 
-  enemyGroup[0] = new UFO(500, randomChance, 30, color(255, 100, 10), 50, aliens);
+  enemyGroup[0] = new UFO(500, 100, 30, color(255, 100, 10), 50, aliens);
 
 }
 
