@@ -15,6 +15,8 @@ class Jumper {
     //Setting up the Jumper's image variable
     this.playerImage = playerImage;
 
+    this.radius = 1;
+
     this.fillColor = fillColor;
 
     //player's health varibale so the game can end
@@ -26,7 +28,9 @@ class Jumper {
 
 
     //I will eventuall input a blaster which will use the shift key
-    this.shiftKey = 16;
+    this.spaceKey = 32;
+
+    this.score = 0;
 
 
   }
@@ -49,45 +53,54 @@ class Jumper {
       this.vy = this.speed/1.5;
     }
 
+    //When you press spacebar the Jumper fires a bullet from the Jumper's position
+    if (keyIsDown(this.spaceKey)) {
+      lazer.x = player.x;
+      lazer.y = player.y;
+
+    }
   }
 
   move() {
+    //allows the Jumper to travel the y axis
     this.y += this.vy;
     //This constrainss the player from falling through the canvas
     this.y = constrain(this.y, 0, 220);
   }
 
+  // handleWrapping() {
+  //
+  //   if (this.x < 0) {
+  //     this.x += width;
+  //   }
+  //   else if (this.x > width) {
+  //     this.x -= width;
+  //   }
+  //
+  //   if (this.y < 0) {
+  //     this.y += height;
+  //   }
+  //   else if (this.y > height) {
+  //     this.y -= height;
+  //   }
+  // }
 
-
-  handleWrapping() {
-
-    if (this.x < 0) {
-      this.x += width;
-    }
-    else if (this.x > width) {
-      this.x -= width;
-    }
-
-    if (this.y < 0) {
-      this.y += height;
-    }
-    else if (this.y > height) {
-      this.y -= height;
-    }
-  }
-
-  //These are for later interactions between the player and the other elements
+  //If the Jumper radius intersects with the pillars height the Jumper's...
+  //health will be reduced to 0 and the game will end
   handleBlocking(pillar) {
     let d = dist(this.x, this.y, pillar.x, pillar.y);
-    if (d < this.radius + pillar.radius) {
-
+    if (d < this.radius + pillar.h) {
       this.health = 0;
-  }
+
 
   }
 
-  //These are for later as well...
-  handleZap(ufo) {
+
+  }
+
+  //Same applies to the Ufo, except it will use the Ufo's radius instead...
+  //...of height. The game still ends
+  handleEating(ufo) {
     let d = dist(this.x, this.y, ufo.x, ufo.y);
     if (d < this.radius + ufo.radius) {
 
@@ -96,15 +109,28 @@ class Jumper {
 
   }
 
-  handleEating() {
+  //If the Bullet's radius intersects the aliens on trajectory, the Ufo's...
+  //health will be reduced to zero
+  handleZap(ufo) {
+    let d = dist(lazer.x, lazer.y, ufo.x, ufo.y);
+    if (d < lazer.radius + ufo.radius) {
+
+      ufo.health = 0;
+
+      ufo.x = width;
+      //Score will update for each Ufo killed
+      this.score += 1;
+  }
 
   }
+
+
 
   display() {
   push();
   noStroke();
   fill(this.fillColor);
-  image(this.playerImage, this.x, this.y, this.radius * 2, this.radius * 2);
+  image(this.playerImage, this.x, this.y);
   pop();
   }
 }

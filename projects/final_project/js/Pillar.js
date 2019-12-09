@@ -27,18 +27,19 @@ class Pillar {
 
   move() {
     //I only want the pillars to move from the right side of the screen to the left
-    this.vx = -this.speed;
+    this.vx = -this.speed/1.5;
 
     this.x += this.vx;
 
     this.handleWrapping();
   }
 
-  //THis checks to see if the Pillar goes of the left side so it knows to repeat itself
+  //THis checks to see if the Pillars goes of the left side so it knows to repeat itself
+  //It redraws it as a random height each time
   handleWrapping() {
     if (this.x < this.w/2) {
       this.x += width;
-      this.h = random(50,150)
+      this.h = random(50,250)
     }
 
   }
@@ -54,8 +55,6 @@ class Pillar {
     pop();
   }
 
-  
-  reset() {
 
-  }
+  
 }

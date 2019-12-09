@@ -7,7 +7,7 @@ class Ufo {
 
     //Setting up the player's image variable
     this.aliensImage = aliensImage;
-    
+
     //Position
     this.x = x;
     this.y = y;
@@ -17,10 +17,12 @@ class Ufo {
     this.vy = 0;
     this.speed = speed;
 
+    this.radius = 20;
+
     //Time properties for noise() function
     this.ty = random(0, 1000);
 
-    //Setting up the player's image variable
+    this.health = 1;
 
 
 
@@ -38,7 +40,7 @@ class Ufo {
     this.y += this.vy;
 
     //Update time properties
-    this.x += this.vx;
+    this.x += this.vx/2;
 
     this.ty += 0.01;
 
@@ -55,7 +57,9 @@ class Ufo {
       this.x += width;
       this.y = random(0, 300);
     //Everytime it makes past the left side it will wrap the other side but...
-    //...with a random y value
+    //...with a random y value. This was my goal, but failed to correctly...
+    //...implement it. Thus when you shoot an alien it can hit multiple ones...
+    //...behind it. This kinda makes the score exciting, but it's not my goal
     }
     else if (this.x > width) {
       this.x -= width;
@@ -74,21 +78,8 @@ class Ufo {
     push();
     noStroke();
     fill(255);
-    image(this.aliensImage, this.x, this.y, this.radius * 2, this.radius * 2);
+    image(this.aliensImage, this.x, this.y);
     pop();
     }
 
-
-
-
-//I will use this later for the lazer interaction
-  reset() {
-    // Random position
-    this.x = random(0, width);
-    this.y = random(0, height);
-    // Default health
-    this.health = this.maxHealth;
-    // Default radius
-    this.radius = this.health;
-  }
 }

@@ -31,13 +31,18 @@ let enderImage;
 let gameBegin = true;
 let gameOver = false;
 
-//setting up my image files even though they undefined
+
+//setting up my image files
 function preload() {
   player = loadImage('assets/images/spaceman.png');
   lazer = loadImage('assets/images/beam.png');
   //Realized I didn't need an image for my blocks
   //blocks = loadImage('assets/images/.png');//
   aliens = loadImage('assets/images/et.png');
+
+  //my images for the start screen and end screen
+  starterImage = loadImage('assets/images/starter.png');
+  enderImage = loadImage('assets/images/ender.png');
 
   }
 
@@ -53,8 +58,11 @@ function setup() {
 //Setting up my constructor values for my Jumper class
   player = new Jumper(100, 220, 5, color(200, 200, 0), 60,  player);
 
+//Constructor for my bullet
+  lazer = new Bullet(100, 220, 5, color(200, 200, 0), 60, lazer);
+
 //Setting up constructors for my Arrays
-  obstacleGroup[0] = new Pillar(10, 250, 50, 100, 5, color(255, 100, 10));
+  obstacleGroup[0] = new Pillar(500, 250, 50, 100, 5, color(161, 156, 228));
 
   enemyGroup[0] = new Ufo(500, 100, 30, color(255, 100, 10), 50, aliens);
 
@@ -65,9 +73,10 @@ function setup() {
 
 function draw() {
   background(255);
-  //Calling the title screen when the game loads
+  //Calling the startscreen when the game loads
   if (gameOver == false && gameBegin == true){
-    // image(enderImage, 0, 0, width, height);
+    //calling my start screen's image
+    image(starterImage, 0, 0, width, height)
     title.display();
     console.log(gameBegin);
     return;
@@ -78,8 +87,13 @@ function draw() {
     gameOver = true;
     fill(255, 0, 0);
     textSize(50);
-    // image(enderImage, 0, 0, width, height)
-    text('GameOver' ,300,550);
+
+  //Calling my ending image
+    image(enderImage, 0, 0, width, height)
+    fill(128,255,188);
+    //The score of how many aliens you kill will display in a larger font in...
+    //...the center position
+    text(player.score ,250, 235)
     }
 
       if (gameOver == false) {
@@ -106,8 +120,13 @@ function draw() {
       player.move();
       player.handleInput();
       player.handleBlocking(obstacleGroup);
-      player.handleZap(aliens);
       player.handleEating(aliens);
+      lazer.handleZap(aliens);
+      lazer.display();
+      lazer.move();
+      //The score will display in the top right of the screen
+      fill(161, 156, 228);
+      text(player.score ,400,50);
 
     }
 
