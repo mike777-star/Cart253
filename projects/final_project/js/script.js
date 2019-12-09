@@ -26,6 +26,9 @@ let aliens;
 //Defining my start and end screen images
 let starterImage;
 let enderImage;
+let backImage;
+
+let soundbite;
 
 //Defining my when game begins and ends
 let gameBegin = true;
@@ -43,7 +46,9 @@ function preload() {
   //my images for the start screen and end screen
   starterImage = loadImage('assets/images/starter.png');
   enderImage = loadImage('assets/images/ender.png');
+  backImage = loadImage('assets/images/background.png');
 
+  soundbite = loadSound("assets/sounds/sound2.wav")
   }
 
 function setup() {
@@ -72,7 +77,7 @@ function setup() {
 }
 
 function draw() {
-  background(255);
+  image(backImage, 0, 0, width, height);
   //Calling the startscreen when the game loads
   if (gameOver == false && gameBegin == true){
     //calling my start screen's image
@@ -89,7 +94,7 @@ function draw() {
     textSize(50);
 
   //Calling my ending image
-    image(enderImage, 0, 0, width, height)
+    image(enderImage, 0, 0, width, height);
     fill(128,255,188);
     //The score of how many aliens you kill will display in a larger font in...
     //...the center position

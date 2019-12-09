@@ -57,6 +57,7 @@ class Jumper {
     if (keyIsDown(this.spaceKey)) {
       lazer.x = player.x;
       lazer.y = player.y;
+      soundbite.play()
 
     }
   }
