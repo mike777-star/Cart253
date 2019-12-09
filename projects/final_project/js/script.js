@@ -10,6 +10,15 @@ let player;
 //He is able to shoot a lazer which travels the screen left to right
 let lazer;
 
+//Array group for the blocks
+let obstacleGroup = [];
+//Array group for the aliens
+let enemyGroup = [];
+
+//defining my titlescreen
+let title;
+
+
 //The blocks appear from the right side of the screen and travel to the left
 let blocks;
 let aliens;
@@ -39,7 +48,7 @@ function setup() {
   createCanvas(500, 300);
   rectMode(CENTER);
   noStroke();
-  fill(fgColor);
+  fill(255);
 
 //Setting up my constructor values for my Jumper class
   player = new Jumper(100, 220, 5, color(200, 200, 0), 60,  player);
@@ -47,12 +56,15 @@ function setup() {
 //Setting up constructors for my Arrays
   obstacleGroup[0] = new Pillar(10, 250, 50, 100, 5, color(255, 100, 10));
 
-  enemyGroup[0] = new UFO(500, 100, 30, color(255, 100, 10), 50, aliens);
+  enemyGroup[0] = new Ufo(500, 100, 30, color(255, 100, 10), 50, aliens);
+
+//Setting up my constructor for my Wordscreen class
+  title = new Wordscreen(gameBegin,gameOver);
 
 }
 
 function draw() {
-
+  background(255);
   //Calling the title screen when the game loads
   if (gameOver == false && gameBegin == true){
     // image(enderImage, 0, 0, width, height);
@@ -74,19 +86,18 @@ function draw() {
 
   //I am calling my array groups alongside their functions involving the player
 
-    for (let i = 0; i < obstacleGroup.length; i++) {
-        obstacleGroup[i].move();
-        obstacleGroup[i].display();
-        player.handleBlocking(obstacleGroup[i]);
-
+    for (let i = 0; i < 1; i++) {
+        obstacleGroup[0].move();
+        obstacleGroup[0].display();
+        player.handleBlocking(obstacleGroup[0]);
       }
 
-      for (let i = 0; i < enemyGroup.length; i++) {
-      enemyGroup[i].move();
-      enemyGroup[i].display();
-      //For when I add the blaster
-      player.handleZap(enemyGroup[i]);
-      player.handleEating(enemyGroup[i]);
+    for (let i = 0; i < 1; i++) {
+        enemyGroup[i].move();
+        enemyGroup[i].display();
+        //For when I add the blaster
+        player.handleZap(enemyGroup[i]);
+        player.handleEating(enemyGroup[i]);
       }
 
 
@@ -94,7 +105,7 @@ function draw() {
       player.display();
       player.move();
       player.handleInput();
-      player.handleBlocking(blocks);
+      player.handleBlocking(obstacleGroup);
       player.handleZap(aliens);
       player.handleEating(aliens);
 
@@ -110,3 +121,4 @@ function draw() {
     if (mouseX > 0 && mouseY > 0){
       gameBegin = false;
     }
+  }

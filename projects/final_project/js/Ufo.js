@@ -5,6 +5,9 @@ class Ufo {
   //Setting up the variables for the UFO's constructor values
   constructor(x, y, speed, fillColor, radius, aliensImage) {
 
+    //Setting up the player's image variable
+    this.aliensImage = aliensImage;
+    
     //Position
     this.x = x;
     this.y = y;
@@ -18,7 +21,7 @@ class Ufo {
     this.ty = random(0, 1000);
 
     //Setting up the player's image variable
-    this.aliensImage = aliensImage;
+
 
 
   }
